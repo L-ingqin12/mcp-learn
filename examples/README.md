@@ -17,6 +17,9 @@
   - [addr2line_server — 程序地址反解](#addr2line_server--程序地址反解)
   - [image_understanding_server — 图片理解](#image_understanding_server--图片理解)
   - [excalidraw_server — Obsidian Excalidraw 图表](#excalidraw_server--obsidian-excalidraw-图表)
+- [跨平台部署](#跨平台部署)
+  - [配置生成器](#配置生成器)
+  - [各平台配置速查](#各平台配置速查)
 - [部署到生产环境](#部署到生产环境)
 - [常见问题](#常见问题)
 
@@ -593,6 +596,86 @@ npx @modelcontextprotocol/inspector python examples/excalidraw_server.py
 - "帮我在 vault/diagrams/ 下画一个微服务架构图，包含 API Gateway, Auth Service, User Service, Order Service, Database"
 - "读取 vault/flow.excalidraw.md 这个图，告诉我里面有哪些流程步骤"
 - "把系统架构图中的 Auth Service 改成红色的，在它旁边加一个 Cache Layer 节点并连线"
+
+---
+
+## 跨平台部署
+
+一份 MCP 服务器代码，可部署到所有主流 AI 编码平台。
+
+### 配置生成器
+
+使用 `generate_config.py` 一键生成 6 个平台的配置文件:
+
+```bash
+# 基础用法: 生成所有平台的 stdio 配置
+python examples/generate_config.py my-server python /path/to/server.py
+
+# 带环境变量
+python examples/generate_config.py my-server python server.py --env API_KEY=xxx
+
+# 同时生成 HTTP 配置 (OpenCode/Cursor/Copilot 支持)
+python examples/generate_config.py my-server python server.py --http-port 8000
+
+# 指定输出目录
+python examples/generate_config.py my-server python server.py -o my-configs/
+```
+
+生成的文件:
+```
+configs/
+├── README.md           # 配置说明
+├── claude-code.json    # Claude Code / Desktop
+├── opencode.json       # OpenCode
+├── cursor.json         # Cursor
+├── vscode-copilot.json # VS Code Copilot
+├── continue.json       # Continue.dev
+└── zed.json            # Zed
+```
+
+每个 JSON 文件包含 `_meta` (平台/路径说明) + `stdio` + `streamable_http` (如可用)。
+
+### 各平台配置速查
+
+以 `simple_server.py` 为例，在 6 个平台上的配置差异:
+
+**Claude Code** (`.mcp.json`):
+```json
+{"mcpServers": {"hello": {"command": "python", "args": ["/path/to/simple_server.py"]}}}
+```
+
+**OpenCode** (`~/.config/opencode/opencode.json`):
+```json
+{"mcp": {"hello": {"type": "local", "command": "python", "args": ["/path/to/simple_server.py"], "enabled": true}}}
+```
+
+**Cursor** (`~/.cursor/mcp.json`):
+```json
+{"mcpServers": {"hello": {"command": "python", "args": ["/path/to/simple_server.py"]}}}
+```
+
+**VS Code Copilot** (`.vscode/mcp.json`):
+```json
+{"servers": {"hello": {"type": "stdio", "command": "python", "args": ["/path/to/simple_server.py"]}}}
+```
+
+**Continue.dev** (`~/.continue/config.json`):
+```json
+{"mcpServers": [{"name": "hello", "transport": {"type": "stdio", "command": "python", "args": ["/path/to/simple_server.py"]}}]}
+```
+
+**Zed** (`~/.config/zed/settings.json`):
+```json
+{"assistant": {"mcp_servers": {"hello": {"command": "python", "args": ["/path/to/simple_server.py"]}}}}
+```
+
+### 关键差异记三点
+
+1. **root key 不同**: `mcpServers` → `mcp` → `servers` → `context_servers`
+2. **Continue.dev 用数组**: 其他都是 object，Continue 是 array + `name` 字段
+3. **OpenCode 要 type + enabled**: `"type": "local"` 和 `"enabled": true` 是必填的
+
+详细兼容性矩阵和更多陷阱见 [09-cross-platform.md](../09-cross-platform.md)。
 
 ---
 

@@ -76,4 +76,5 @@ curl -X POST http://localhost:8000/mcp \
 5. **第 5 天**: 研究 06-transports.md, 了解不同传输方式
 6. **第 6 天**: 阅读 07-best-practices.md, 学习安全和性能优化
 7. **第 7 天**: 阅读 08-mcp-vs-skill.md, 掌握架构选型决策方法
-8. **之后**: 阅读官方规范, 浏览社区服务器源码, 动手做项目
+8. **第 8 天**: 阅读 09-cross-platform.md, 将服务器部署到 OpenCode/Cursor/Copilot 等多平台
+9. **之后**: 阅读官方规范, 浏览社区服务器源码, 动手做项目
