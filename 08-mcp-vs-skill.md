@@ -6,7 +6,7 @@
 
 ## 定义
 
-| | MCP | Skill |
+| 维度 | MCP | Skill |
 |------|-----|-------|
 | 本质 | 独立进程，通过 JSON-RPC 与 AI 通信 | Claude Code 进程内的指令/工作流定义 |
 | 文件形式 | Python/Node/Go 代码 | Markdown 文件 |

@@ -83,7 +83,7 @@ async def multi_content_tool(query: str) -> list:
 ### URI 设计规范
 
 ```
-<scheme>://<path>
+`<scheme>://<path>`
 
 示例:
   file://documents/report.txt        — 文件系统
@@ -129,7 +129,7 @@ async def list_resources(cursor: str | None = None) -> list:
 
 ### 多轮对话模板
 
-```python
+````python
 from mcp.types import PromptMessage, TextContent
 
 @mcp.prompt()
@@ -148,26 +148,22 @@ def interview_practice(role: str, difficulty: str = "medium") -> list:
 
 @mcp.prompt()
 def step_by_step_debug(error: str, code: str) -> list:
-    """分步调试模板"""
+    """分步调试模板 — 注意: 代码块的数量要与外层不同以避免嵌套"""
     return [
         PromptMessage(
             role="user",
             content=TextContent(
                 type="text",
-                text=f"""请按以下步骤分析问题:
-
-1. 阅读错误信息: {error}
-2. 分析相关代码:
-```python
-{code}
-```
-3. 识别可能的根本原因
-4. 提供修复建议
-5. 给出修复后的代码"""
+                text=f"请按以下步骤分析问题:\n\n"
+                     f"1. 阅读错误信息: {error}\n"
+                     f"2. 分析相关代码:\n{code}\n"
+                     f"3. 识别可能的根本原因\n"
+                     f"4. 提供修复建议\n"
+                     f"5. 给出修复后的代码"
             )
         ),
     ]
-```
+````
 
 ## 选型指南
 

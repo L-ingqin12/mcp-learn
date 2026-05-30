@@ -152,7 +152,7 @@ claude mcp add my-server -- python /path/to/server.py
 
 ### 3. Cursor
 
-配置文件: `~/.cursor/mcp.json` (全局) 或 `<project>/.cursor/mcp.json`
+配置文件: `~/.cursor/mcp.json` (全局) 或 `./.cursor/mcp.json` (项目)
 
 ```json
 {
