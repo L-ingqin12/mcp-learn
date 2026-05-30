@@ -15,10 +15,12 @@
 
 - [MCP 官方 Quickstart](https://modelcontextprotocol.io/quickstart)
 - [DazzleML Python MCP Tutorial (GitHub)](https://github.com/DazzleML/MCP-Server-Tutorial) — 9 章完整教程
-- [IBM MCP Context Forge](https://ibm.github.io/mcp-context-forge/1.0.0/best-practices/developing-your-mcp-server-python/)
+- [IBM MCP Context Forge](https://ibm.github.io/mcp-context-forge/1.0.0/best-practices/developing-your-mcp-server-python/) — 含架构模式参考
 - [SitePoint — 全栈 MCP 开发指南](https://www.sitepoint.com/mcp-model-context-protocol-complete-developer-integration-guide/)
 - [Microsoft Azure — Web App 作为 MCP Server](https://learn.microsoft.com/en-us/azure/app-service/tutorial-ai-model-context-protocol-server-node)
-- [LinkedIn Learning — MCP 入门课程 (Anthropic 官方)](https://www.linkedin.com/learning/introduction-to-model-context-protocol-by-anthropic)
+- [NearForm — MCP 实现技巧与陷阱](https://nearform.com/digital-community/implementing-model-context-protocol-mcp-tips-tricks-and-pitfalls/)
+- [Block/Square — MCP 服务器设计 Playbook](https://engineering.block.xyz/blog/blocks-playbook-for-designing-mcp-servers)
+- [MCP 生产部署指南 (Dev.to)](https://dev.to/jahanzaibai/model-context-protocol-how-i-build-mcp-servers-that-run-in-production-and-what-most-guides-skip-5fcc)
 
 ## SDK 对比
 
@@ -28,7 +30,10 @@
 | typescript-sdk | TypeScript | `npm i @modelcontextprotocol/sdk` | 官方维护 |
 | csharp-sdk | C# | `dotnet add package ModelContextProtocol` | Microsoft 官方, v1.0 (2026.03) |
 | mcp-go | Go | `go get github.com/mark3labs/mcp-go` | 社区维护 |
+| rust-mcp-sdk | Rust | `cargo add rust-mcp-sdk` | 2025-11-25 全功能, OAuth, DNS rebinding |
+| mcp-lite | TS (边缘) | `npm i mcp-lite` | 零依赖, Cloudflare Workers/Deno/Bun |
 | java-sdk | Java/Kotlin | Maven/Gradle | Spring AI 集成 |
+| dart-sdk | Dart | `dart pub add mcp_server` | Flutter/Dart 生态 |
 
 ## 关键 SEP (规范增强提案)
 
@@ -50,6 +55,12 @@
 - [server-postgres](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) — PostgreSQL 数据库
 - [server-slack](https://github.com/modelcontextprotocol/servers/tree/main/src/slack) — Slack 集成
 - [server-brave-search](https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search) — Web 搜索
+- [MCP Tools Cookbook](https://github.com/ydmitry/mcp-tools-cookbook) — 设计模式配方集
+- [Awesome MCP Servers](https://github.com/bgizdov/awesome-mcp-servers) — 7700+ 社区服务器目录
+- [Postgres MCP Pro](https://github.com/crystaldba/postgres-mcp) — 生产级 PostgreSQL 服务器
+- [ClickHouse MCP](https://github.com/ClickHouse/mcp-clickhouse) — 官方 ClickHouse 服务器
+- [Sentry MCP 生产实践](https://blog.sentry.io/monitoring-mcp-server-sentry/) — 60M 请求/月案例
+- [Langfuse MCP 开发经验](https://langfuse.com/blog/2025-12-09-building-langfuse-mcp-server)
 
 ## 调试工具
 
@@ -65,7 +76,17 @@ mcp-cli --server "python my_server.py" tools list
 curl -X POST http://localhost:8000/mcp \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
+
+# MCP Workbench — 可视化协议调试器
+# https://www.playground.orkes.io/blog/mcp-workbench-protocol-debugger/
 ```
+
+## 监控与可观测性
+
+- [Sentry MCP 监控](https://blog.sentry.io/monitoring-mcp-server-sentry/) — 生产级 MCP 观测方案
+- [PubNub — MCP Server 测试指南](https://www.pubnub.com/blog/testing-mcp-servers/)
+- [MCP 治理实战 (腾讯云)](https://cloud.tencent.cn/developer/article/2668531) — 健康检查、沙箱执行、Registry 管理
+- [OpenTelemetry + MCP](https://opentelemetry.io/) — 标准指标采集
 
 ## 推荐学习路径
 
@@ -77,4 +98,7 @@ curl -X POST http://localhost:8000/mcp \
 6. **第 6 天**: 阅读 07-best-practices.md, 学习安全和性能优化
 7. **第 7 天**: 阅读 08-mcp-vs-skill.md, 掌握架构选型决策方法
 8. **第 8 天**: 阅读 09-cross-platform.md, 将服务器部署到 OpenCode/Cursor/Copilot 等多平台
-9. **之后**: 阅读官方规范, 浏览社区服务器源码, 动手做项目
+9. **第 9 天**: 阅读 10-advanced-patterns.md, 学习工作流导向/语义路由/Token 预算等高级模式
+10. **第 10 天**: 阅读 11-testing-debugging.md, 掌握测试调试和生产部署
+11. **第 11 天**: 阅读 12-real-world-examples.md, 研究 Sentry/Linear/GitHub 的架构决策
+12. **之后**: 阅读官方规范, 浏览社区服务器源码, 动手做项目; 日常查阅 cheatsheet.md
