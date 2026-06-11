@@ -101,4 +101,5 @@ curl -X POST http://localhost:8000/mcp \
 9. **第 9 天**: 阅读 10-advanced-patterns.md, 学习工作流导向/语义路由/Token 预算等高级模式
 10. **第 10 天**: 阅读 11-testing-debugging.md, 掌握测试调试和生产部署
 11. **第 11 天**: 阅读 12-real-world-examples.md, 研究 Sentry/Linear/GitHub 的架构决策
-12. **之后**: 阅读官方规范, 浏览社区服务器源码, 动手做项目; 日常查阅 cheatsheet.md
+12. **第 12 天**: 阅读 13-ecosystem-projects.md，浏览 GitHub 高分 MCP 项目，发现可复用的轮子
+13. **之后**: 阅读官方规范, 浏览社区服务器源码, 动手做项目; 日常查阅 cheatsheet.md

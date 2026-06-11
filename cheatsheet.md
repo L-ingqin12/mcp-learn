@@ -142,4 +142,16 @@ docker run --read-only --cap-drop ALL --user 1000:1000 \
 | 多平台 | 09 → examples/generate_config.py |
 | 生产上线 | 11 → 07 |
 | 案例参考 | 12 |
+| 发现项目 | 13 (GitHub 高分项目目录) |
 | 快速查阅 | 本页 |
+
+## GitHub 高分项目速查
+
+```
+学习:    microsoft/mcp-for-beginners           ★16k
+列表:    punkpeye/awesome-mcp-servers          ★86k
+参考:    modelcontextprotocol/servers          ★87k
+框架:    jlowin/fastmcp                        ★25k
+案例:    playwright-mcp ★33k | github-mcp ★30k
+企业:    bh-rat/awesome-mcp-enterprise         精选
+```
